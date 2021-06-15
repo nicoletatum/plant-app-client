@@ -6,7 +6,6 @@ export const Register = (props) => {
     const firstName = React.createRef()
     const lastName = React.createRef()
     const username = React.createRef()
-    const bio = React.createRef()
     const password = React.createRef()
     const verifyPassword = React.createRef()
     const passwordDialog = React.createRef()
@@ -19,12 +18,11 @@ export const Register = (props) => {
                 "username": username.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
-                "bio": bio.current.value,
                 "username": username.current.value,
                 "password": password.current.value
             }
 
-            return fetch("http://127.0.0.1:3000/register", {
+            return fetch("http://127.0.0.1:8000/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -63,7 +61,7 @@ export const Register = (props) => {
                     <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputusername"> username address </label>
+                    <label htmlFor="inputusername"> username </label>
                     <input ref={username} type="username" name="username" className="form-control" placeholder="username" required />
                 </fieldset>
                 <fieldset>
@@ -73,10 +71,6 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
-                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other gamers know a little bit about you..." />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
