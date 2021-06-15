@@ -3,21 +3,21 @@ import { Link } from "react-router-dom"
 
 
 export const Login = props => {
-    const email = React.createRef()
+    const username = React.createRef()
     const password = React.createRef()
     const invalidDialog = React.createRef()
 
     const handleLogin = (e) => {
         e.preventDefault()
 
-        return fetch("http://127.0.0.1:8000/login", {
+        return fetch("http://localhost:8000/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                username: email.current.value,
+                username: username.current.value,
                 password: password.current.value
             })
         })
@@ -36,7 +36,7 @@ export const Login = props => {
     return (
         <main className="container--login">
             <dialog className="dialog dialog--auth" ref={invalidDialog}>
-                <div>Email or password was not valid.</div>
+                <div>username or password was not valid.</div>
                 <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
             </dialog>
             <section>
@@ -44,8 +44,8 @@ export const Login = props => {
                     <h1>Plant App</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
-                        <input ref={email} type="email" id="email" className="form-control"  placeholder="Email address" required autoFocus />
+                        <label htmlFor="inputUsername"> Username </label>
+                        <input ref={username} type="username" id="username" className="form-control"  placeholder="Username" required autoFocus />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>

@@ -1,10 +1,11 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
+
 export const Register = (props) => {
     const firstName = React.createRef()
     const lastName = React.createRef()
-    const email = React.createRef()
+    const username = React.createRef()
     const bio = React.createRef()
     const password = React.createRef()
     const verifyPassword = React.createRef()
@@ -15,15 +16,15 @@ export const Register = (props) => {
 
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
-                "username": email.current.value,
+                "username": username.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
                 "bio": bio.current.value,
-                "email": email.current.value,
+                "username": username.current.value,
                 "password": password.current.value
             }
 
-            return fetch("http://127.0.0.1:8000/register", {
+            return fetch("http://127.0.0.1:3000/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -62,8 +63,8 @@ export const Register = (props) => {
                     <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="Email address" required />
+                    <label htmlFor="inputusername"> username address </label>
+                    <input ref={username} type="username" name="username" className="form-control" placeholder="username" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword"> Password </label>
