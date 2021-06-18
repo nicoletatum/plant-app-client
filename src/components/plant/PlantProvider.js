@@ -6,6 +6,7 @@ export const PlantProvider = (props) => {
     const [ plants, setPlants ] = useState([])
     const [ lights, setLights ] = useState([])
     const [ water, setWater] = useState([])
+    const [ plant, setPlant ] = useState([])
 
     const getPlants = () => {
         return fetch("http://localhost:8000/plants", {
@@ -70,7 +71,7 @@ export const PlantProvider = (props) => {
     }
 
     return (
-        <PlantContext.Provider value={{ plants, water, lights, getPlants, editPlant, setLights, setWater, getWater, getLights, getPlantById, createPlant}} >
+        <PlantContext.Provider value={{ plants, plant, getPlants, setPlant, water, lights, editPlant, setLights, setWater, getWater, getLights, getPlantById, createPlant}} >
             {props.children}
         </PlantContext.Provider>
     )
