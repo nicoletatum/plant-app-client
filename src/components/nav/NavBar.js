@@ -1,22 +1,26 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import "./NavBar.css"
+import 'bulma/css/bulma.min.css';
 
 export const NavBar = (props) => {
     return (
-        <ul className="navbar">
-            <li className="navbar__item">
-                Navigation link
-            </li>
-            <li className="navbar__item">
-                Navigation link
-            </li>
-            <li className="navbar__item">
-                Navigation link
-            </li>
+        <nav className="navbar">
+            <a className="navbar-item" href="/">
+                home
+            </a>
+            <a className="navbar-item">
+                about
+            </a>
+            <a className="navbar-item" href="/plants">
+                view plants
+            </a>
+            <a className="navbar-item" href="/add-plant">
+                add plant
+            </a>
             {
                 (localStorage.getItem("lu_token") !== null) ?
-                    <li className="nav-item">
+                    <li className="navbar-item">
                         <button className="nav-link fakeLink"
                             onClick={() => {
                                 localStorage.removeItem("lu_token")
@@ -32,6 +36,7 @@ export const NavBar = (props) => {
                             <Link className="nav-link" to="/register">Register</Link>
                         </li>
                     </>
-            }        </ul>
+            }       
+        </nav>
     )
 }
