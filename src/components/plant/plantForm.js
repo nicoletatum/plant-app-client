@@ -30,11 +30,12 @@ export const PlantForm = () => {
             getPlantById(plantId).then(plant => {
                 setCurrentPlant({
                     name: plant.name,
-                    light_level: plant.light_level,
-                    water_amount: plant.water_amount,
+                    light_level: plant.light_level.id,
+                    water_amount: plant.water_amount.id,
                     temp_needs: plant.temp_needs,
                     potting_needs: plant.potting_needs,
-                    notes: plant.notes
+                    notes: plant.notes,
+                    id: plant.id
                 })
             })
         }
@@ -65,7 +66,6 @@ export const PlantForm = () => {
                 .then(() => history.push('/plants'))
         }
     }
-
 
     return(
         <>  

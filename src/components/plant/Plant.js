@@ -5,11 +5,19 @@ import "./Plant.css"
 
 export const PlantCard = () => {
 
-    const { getPlantById } = useContext(PlantContext)
+    const { getPlantById, deletePlant } = useContext(PlantContext)
 
     const [ plant, setPlant ] = useState({})
 
-    // const history = useHistory()
+    const history = useHistory()
+
+    const handleDelete = () => {
+        console.log("delete", plant)
+        deletePlant(plant.id)
+            .then(() => {
+                history.push("/plants")
+            })
+    }
 
     //get id from url 
     const { plantId } = useParams()
@@ -30,7 +38,10 @@ export const PlantCard = () => {
             <div className="">Temp: {plant.temp_needs}</div>
             <div className="">Potting: {plant.potting_needs}</div>
             <div className="">Notes: {plant.notes}</div>
-            <button>Details</button>
+            <button className="button" onClick={() => {
+                history.push(`/plant/${plant.id}/edit`)
+            }}>Edit</button>
+            <button className="button" onClick={handleDelete}>Delete</button>
         </div>
         </>
     )

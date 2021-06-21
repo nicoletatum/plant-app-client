@@ -11,11 +11,14 @@ export const ApplicationViews = () => {
             <Route exact path="/plants">
                 <PlantList/>
             </Route>
-            <Route exact path="/add-plant">
+            <Route exact path="/plant-form">
                 <PlantForm/>
             </Route>
             <Route exact path="/plant/:plantId(\d+)">
                 <PlantCard/>
+            </Route>
+            <Route exact path="/plant/:plantId(\d+)/edit">
+                <PlantForm/>
             </Route>
         </PlantProvider>
         </>

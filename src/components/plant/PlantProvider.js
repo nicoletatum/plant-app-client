@@ -70,8 +70,18 @@ export const PlantProvider = (props) => {
         .then(getPlants)
     }
 
+    const deletePlant = (plantId) => {
+        return fetch(`http://localhost:8000/plants/${plantId}`,{
+            method:"DELETE",
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("lu_token")}`
+            }
+        })
+        .then(getPlants)
+    }
+
     return (
-        <PlantContext.Provider value={{ plants, plant, getPlants, setPlant, water, lights, editPlant, setLights, setWater, getWater, getLights, getPlantById, createPlant}} >
+        <PlantContext.Provider value={{ plants, plant, getPlants, deletePlant, setPlant, water, lights, editPlant, setLights, setWater, getWater, getLights, getPlantById, createPlant}} >
             {props.children}
         </PlantContext.Provider>
     )
