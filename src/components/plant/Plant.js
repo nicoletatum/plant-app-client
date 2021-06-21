@@ -6,10 +6,16 @@ import "./Plant.css"
 export const PlantCard = () => {
 
     const { getPlantById, deletePlant } = useContext(PlantContext)
-
     const [ plant, setPlant ] = useState({})
-
     const history = useHistory()
+    const { plantId } = useParams()
+    
+    useEffect(() => {
+        getPlantById(plantId)
+        .then((res) => {
+            setPlant(res)
+        })
+    }, [])
 
     const handleDelete = () => {
         console.log("delete", plant)
@@ -19,15 +25,8 @@ export const PlantCard = () => {
             })
     }
 
-    //get id from url 
-    const { plantId } = useParams()
 
-    useEffect(() => {
-        getPlantById(plantId)
-        .then((res) => {
-            setPlant(res)
-        })
-    }, [])
+
 
     return (
         <>
@@ -38,6 +37,7 @@ export const PlantCard = () => {
             <div className="">Temp: {plant.temp_needs}</div>
             <div className="">Potting: {plant.potting_needs}</div>
             <div className="">Notes: {plant.notes}</div>
+            <img src={plant.plant_pic} />
             <button className="button" onClick={() => {
                 history.push(`/plant/${plant.id}/edit`)
             }}>Edit</button>

@@ -8,23 +8,14 @@ export const PlantForm = () => {
     const history = useHistory()
     const { createPlant, getPlantById, getLights, editPlant, plants, plant, lights, water, getWater } = useContext(PlantContext)
     const { plantId } = useParams()
-
-    const[currentPlant, setCurrentPlant] = useState({
-        name:"",
-        light_level: 0,
-        water_amount: 0,
-        temp_needs: "",
-        potting_needs: "",
-        notes: ""
-    })
-
+    const [image, setImage] = useState([])
 
     useEffect(() => {
         getLights()
         .then(getWater())
     }, [])
 
-
+    
     useEffect(() => {
         if (plantId) {
             getPlantById(plantId).then(plant => {
@@ -35,29 +26,35 @@ export const PlantForm = () => {
                     temp_needs: plant.temp_needs,
                     potting_needs: plant.potting_needs,
                     notes: plant.notes,
+                    plant_pic: image,
                     id: plant.id
                 })
             })
         }
     }, [plantId])
+    
+    const[currentPlant, setCurrentPlant] = useState({
+        name:"",
+        light_level: 0,
+        water_amount: 0,
+        temp_needs: "",
+        potting_needs: "",
+        notes: "",
+        plant_pic:""
+    })
 
     const handleInput = (event) => {
         const newPlantState = { ...currentPlant }
         let selectedValue = event.target.value
-
         if (event.target.id === "water_amount" || event.target.id ==="light_level"){
             selectedValue = parseInt(selectedValue)
         }
-
         newPlantState[event.target.id] = selectedValue
-
         setCurrentPlant(newPlantState)
     }
 
-
     const handleClickSavePlant = (event) => {
         event.preventDefault()
-
         if (plantId) {
             editPlant(currentPlant)
                 .then(() => history.push(`/plant/${currentPlant.id}`))
@@ -66,6 +63,23 @@ export const PlantForm = () => {
                 .then(() => history.push('/plants'))
         }
     }
+
+    const getBase64 = (file, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(file);
+    } 
+
+        //handle controlled input change and convert the image to a format that can be sent to server
+    const createPicString = (event) => {
+        getBase64(event.target.files[0], (base64ImageString) => {
+                // Update a component state variable to the value of base64ImageString
+                const newImageState = { ...currentPlant }
+                newImageState.plant_pic = base64ImageString
+                setCurrentPlant(newImageState)
+            });
+        }
+
 
     return(
         <>  
@@ -110,13 +124,20 @@ export const PlantForm = () => {
         <div className="field">
             <label className="label">Potting:</label>
             <div className="control">
-                <input className="input form-control" type="text" type="text" id="potting_needs" required autoFocus value={currentPlant.potting_needs} onChange={handleInput}></input>
+                <input className="input form-control"type="text" id="potting_needs" required autoFocus value={currentPlant.potting_needs} onChange={handleInput}></input>
             </div>
         </div>
         <div className="field">
             <label className="label">Notes:</label>
             <div className="control">
-                <input className="input form-control" type="text" type="text" id="notes" required autoFocus value={currentPlant.notes} onChange={handleInput}></input>
+                <input className="input form-control"type="text" id="notes" required autoFocus value={currentPlant.notes} onChange={handleInput}></input>
+            </div>
+        </div>
+        <div className="field">
+            <label className="label">Plant:</label>
+            <div className="control">
+            <input type="file" id="plant_pic" onChange={createPicString} />
+            <input type="hidden" id="plant_pic" value={image} />
             </div>
         </div>
         <div className="control">
