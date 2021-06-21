@@ -15,13 +15,13 @@ export const NavBar = (props) => {
             <a className="navbar-item" href="/plants">
                 view plants
             </a>
-            <a className="navbar-item" href="/add-plant">
+            <a className="navbar-item" href="/plant-form">
                 add plant
             </a>
             {
                 (localStorage.getItem("lu_token") !== null) ?
                     <li className="navbar-item">
-                        <button className="nav-link fakeLink"
+                        <button className="nav-link button"
                             onClick={() => {
                                 localStorage.removeItem("lu_token")
                                 props.history.push({ pathname: "/" })
