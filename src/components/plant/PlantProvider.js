@@ -25,6 +25,7 @@ export const PlantProvider = (props) => {
             }
         })
             .then(response => response.json())
+            .then(setPlant)
     }
 
     const getLights = () => {
@@ -54,7 +55,7 @@ export const PlantProvider = (props) => {
             },
             body: JSON.stringify(plant)
         })
-        .then(getPlants)
+        .then(() => getPlantById(plant.id))
     }
     
 
