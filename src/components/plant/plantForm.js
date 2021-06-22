@@ -6,7 +6,7 @@ import { useHistory, useParams } from "react-router-dom"
 export const PlantForm = () => {
 
     const history = useHistory()
-    const { createPlant, getPlantById, getLights, editPlant, plants, plant, lights, water, getWater } = useContext(PlantContext)
+    const { createPlant, getPlantById, getLights, editPlant, plants, plant, setPlant, lights, water, getWater } = useContext(PlantContext)
     const { plantId } = useParams()
     const [image, setImage] = useState([])
 
@@ -18,18 +18,8 @@ export const PlantForm = () => {
     
     useEffect(() => {
         if (plantId) {
-            getPlantById(plantId).then(plant => {
-                setCurrentPlant({
-                    name: plant.name,
-                    light_level: plant.light_level.id,
-                    water_amount: plant.water_amount.id,
-                    temp_needs: plant.temp_needs,
-                    potting_needs: plant.potting_needs,
-                    notes: plant.notes,
-                    plant_pic: image,
-                    id: plant.id
-                })
-            })
+            getPlantById(plantId)
+            .then(setCurrentPlant(plant))
         }
     }, [plantId])
     
@@ -56,8 +46,11 @@ export const PlantForm = () => {
     const handleClickSavePlant = (event) => {
         event.preventDefault()
         if (plantId) {
-            editPlant(currentPlant)
-                .then(() => history.push(`/plant/${currentPlant.id}`))
+            const editedPlant = { ...currentPlant }
+            editedPlant["light_level"] =editedPlant["light_level"].id ? editedPlant["light_level"].id : editedPlant["light_level"]
+            editedPlant["water_amount"] =editedPlant["water_amount"].id ? editedPlant["water_amount"].id : editedPlant["water_amount"]
+            editPlant(editedPlant)
+                .then(() => history.push(`/plant/${editedPlant.id}`))
         } else {
             createPlant(currentPlant)
                 .then(() => history.push('/plants'))
@@ -92,7 +85,7 @@ export const PlantForm = () => {
         <div className="field">
             <label className="label">Light Requirements: </label>
             <div>
-                <select className="select" id="light_level" required autoFocus value={currentPlant.light_level} onChange={handleInput}>
+                <select className="select" id="light_level" required autoFocus value={currentPlant.light_level.id} onChange={handleInput}>
                     <option value="0">Select Light Needs... </option>
                         {
                             lights.map(level => {
@@ -105,7 +98,7 @@ export const PlantForm = () => {
         <div className="field">
             <label className="label">Water Requirements: </label>
             <div>
-                <select className="select" id="water_amount" required autoFocus value={currentPlant.water_amount} onChange={handleInput}>
+                <select className="select" id="water_amount" required autoFocus value={currentPlant.water_amount.id} onChange={handleInput}>
                     <option value="0">Select Water Requirements... </option>
                         {
                             water.map(amount => {
