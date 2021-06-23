@@ -1,8 +1,12 @@
 .detailsImage{
     max-width:30%
 }
-.is-ancestor{
+.columns{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    height: 100vh;
+    padding: 10em;
+}
+
+.container{
+    padding: 10em
 }
