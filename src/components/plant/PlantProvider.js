@@ -25,7 +25,6 @@ export const PlantProvider = (props) => {
             }
         })
             .then(response => response.json())
-            .then(setPlant)
     }
 
     const getLights = () => {

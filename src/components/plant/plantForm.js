@@ -19,7 +19,7 @@ export const PlantForm = () => {
     useEffect(() => {
         if (plantId) {
             getPlantById(plantId)
-                .then(setCurrentPlant(plant))
+                .then(setCurrentPlant)
         }
     }, [plantId])
 

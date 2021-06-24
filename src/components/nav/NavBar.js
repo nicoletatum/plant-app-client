@@ -6,13 +6,10 @@ import 'bulma/css/bulma.min.css';
 export const NavBar = (props) => {
     return (
         <nav className="navbar is-fixed-top">
-            <a className="navbar-item" href="/">
+            <a className="navbar-item" href="/home">
                 home
             </a>
-            <a className="navbar-item">
-                about
-            </a>
-            <a className="navbar-item" href="/plants">
+            <a className="navbar-item" to="/PlantList">
                 view plants
             </a>
             <a className="navbar-item" href="/plant-form">
