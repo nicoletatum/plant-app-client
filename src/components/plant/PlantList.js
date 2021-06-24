@@ -10,7 +10,7 @@ export const PlantList = () => {
     const timestamp = new Date().toLocaleString()
     const today = moment(timestamp).format('YYYY-MM-DD')
 
-    const waterDate = moment(timestamp).add(7, 'days').calendar();
+    const waterDate = moment(timestamp).subtract(7, 'days').calendar();
 
     useEffect(() => {
         getPlants()
@@ -33,7 +33,7 @@ export const PlantList = () => {
             <div className="columns is-multiline body">
                 {plants.map(plant => {
                     {
-                        if (moment(plant.last_water).isAfter(waterDate)){    
+                        if (moment(plant.last_water).isBefore(waterDate)){    
                     return (
                             <>
                                 <h1 className="">These plants need water!</h1>
