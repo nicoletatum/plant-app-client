@@ -36,21 +36,22 @@ export const PlantList = () => {
                         if (moment(plant.last_water).isBefore(waterDate)){    
                     return (
                             <>
-                                <h1 className="">These plants need water!</h1>
-                                <div className="column is-one-fifth is-flex">
+                                <div className="column is-one-quarter is-flex">
                                     <div className="tile is-child box">
-                                        <div className="title">{plant.name}</div>
+                                        <div className="title">I need water!</div>
+                                        <div className="">{plant.name}</div>
                                         <div className=""><b>Last Watered:</b> {plant.last_water}</div>
                                         <div className="image is-4by4"><img src={plant.plant_pic} /></div>
                                         <div className=""><b>Water</b> {plant.water_amount?.amount}</div>
-                                        <button className="button" id={`plant--${plant.id}`} onClick={WaterPlant}> watered </button>
+                                        <button className="button" id={`plant--${plant.id}`} onClick={WaterPlant}> water </button>
                                     </div>
                                 </div>
                             </>
                         )}
                     else {return(<></>)}}
                 })}
-
+                </div>
+                <div className="columns is-multiline body">
                 {plants.map(plant => {
                     return (
                         <>
@@ -66,7 +67,7 @@ export const PlantList = () => {
                                     <div className=""><b>Water</b> {plant.water_amount?.amount}</div>
                                     <div className=""><b>Temp</b> {plant.temp_needs}</div>
                                     <div className=""><b>Potting</b> {plant.potting_needs}</div>
-                                    <button className="button" id={`plant--${plant.id}`} onClick={WaterPlant}> watered </button>
+                                    <button className="button" id={`plant--${plant.id}`} onClick={WaterPlant}> water </button>
                                     <button className="button" onClick={() => {
                                         history.push(`/plant/${plant.id}`)
                                     }}>Details</button>

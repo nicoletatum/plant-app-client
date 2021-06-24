@@ -8,11 +8,11 @@ import { Home } from "./home/home"
 export const ApplicationViews = () => {
     return (
         <>
-        <Route exact path="/home">
+        <Route exact path="/plants">
                 <Home/>
         </Route>
         <PlantProvider>
-            <Route exact path="/home">
+            <Route exact path="/plants">
                 <PlantList/>
             </Route>
             <Route exact path="/plant-form">
