@@ -28,8 +28,10 @@ export const PlantCard = () => {
         newPlantState[event.target.id] = selectedValue
         newPlantState["light_level"] = newPlantState["light_level"].id
         newPlantState["water_amount"] = newPlantState["water_amount"].id
-
         editPlant(newPlantState)
+        .then(() => {
+            history.go(0)
+        })
     }
 
 
