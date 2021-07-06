@@ -4,9 +4,13 @@ import { PlantList } from "./plant/PlantList"
 import { PlantProvider } from "./plant/PlantProvider"
 import { PlantForm } from "./plant/plantForm"
 import { PlantCard } from "./plant/Plant"
+import { Home } from "./home/home"
 export const ApplicationViews = () => {
     return (
         <>
+        <Route exact path="/plants">
+                <Home/>
+        </Route>
         <PlantProvider>
             <Route exact path="/plants">
                 <PlantList/>

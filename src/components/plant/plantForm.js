@@ -19,7 +19,7 @@ export const PlantForm = () => {
     useEffect(() => {
         if (plantId) {
             getPlantById(plantId)
-                .then(setCurrentPlant(plant))
+                .then(setCurrentPlant)
         }
     }, [plantId])
 
@@ -30,7 +30,8 @@ export const PlantForm = () => {
         temp_needs: "",
         potting_needs: "",
         notes: "",
-        plant_pic: ""
+        plant_pic: "",
+        last_water: ""
     })
 
     const handleInput = (event) => {
@@ -125,6 +126,12 @@ export const PlantForm = () => {
                     <label className="label">Notes:</label>
                     <div className="control">
                         <input className="input form-control" type="text" id="notes" required autoFocus value={currentPlant.notes} onChange={handleInput}></input>
+                    </div>
+                </div>
+                <div className="field">
+                    <label className="label">Last Watered:</label>
+                    <div className="control">
+                        <input className="input form-control" type="date" id="last_water" required autoFocus value={currentPlant.last_water} onChange={handleInput}></input>
                     </div>
                 </div>
                 <div className="field">
