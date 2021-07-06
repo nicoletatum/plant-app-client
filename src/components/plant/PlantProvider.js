@@ -9,7 +9,7 @@ export const PlantProvider = (props) => {
     const [ plant, setPlant ] = useState([])
 
     const getPlants = () => {
-        return fetch("http://localhost:8000/plants", {
+        return fetch("https://my-plant-care.herokuapp.com/plants", {
             headers:{
             "Authorization": `Token ${localStorage.getItem("lu_token")}`
             }
@@ -19,7 +19,7 @@ export const PlantProvider = (props) => {
     }   
 
     const getPlantById = (plantId) => {
-        return fetch(`http://localhost:8000/plants/${plantId}`, {
+        return fetch(`https://my-plant-care.herokuapp.com/plants/${plantId}`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`
             }
@@ -28,7 +28,7 @@ export const PlantProvider = (props) => {
     }
 
     const getLights = () => {
-        return fetch("http://localhost:8000/light", {
+        return fetch("https://my-plant-care.herokuapp.com/light", {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`
             }
@@ -37,7 +37,7 @@ export const PlantProvider = (props) => {
         .then(setLights))
     }
     const getWater = () => {
-        return fetch("http://localhost:8000/water", {
+        return fetch("https://my-plant-care.herokuapp.com/water", {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`
             }
@@ -46,7 +46,7 @@ export const PlantProvider = (props) => {
         .then(setWater))
     }
     const editPlant = (plant) => {
-        return fetch(`http://localhost:8000/plants/${plant.id}`, {
+        return fetch(`https://my-plant-care.herokuapp.com/plants/${plant.id}`, {
             method:"PUT",
             headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`,
@@ -59,7 +59,7 @@ export const PlantProvider = (props) => {
     
 
     const createPlant = (plant) => {
-        return fetch("http://localhost:8000/plants",{
+        return fetch("https://my-plant-care.herokuapp.com/plants",{
             method:"POST",
             headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`,
@@ -71,7 +71,7 @@ export const PlantProvider = (props) => {
     }
 
     const deletePlant = (plantId) => {
-        return fetch(`http://localhost:8000/plants/${plantId}`,{
+        return fetch(`https://my-plant-care.herokuapp.com/plants/${plantId}`,{
             method:"DELETE",
             headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`
